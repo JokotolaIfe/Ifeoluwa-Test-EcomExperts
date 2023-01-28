@@ -22,9 +22,17 @@ setTimeout(async ()=>{
 <!--  listen to click event from the delete button -->
           document.getElementById(btnId).addEventListener("click", async function(event) {
             setTimeout(async ()=>{
-<!--  if handbag is deleted  -->
-              if(addOnExist.length > 0){
-              console.log('execue delete');
+            <!-- refetch cart items -->
+            let res_ = await fetch(url);
+            let cartData_ = await res_.json();
+            let cartItems_ = await cartData_.items;
+            <!--   check if addon item has already been added to cart -->
+             let addOnExist_ = await cartItems_.filter(el =>{
+              return el.handle === 'dark-winter-jacket';
+            });
+              <!--  if handbag is deleted  -->
+              if(addOnExist_.length > 0){
+                console.log('execue delete');
                  await fetch('/cart/change.js', {
                   method: "POST",
                   body: JSON.stringify({
