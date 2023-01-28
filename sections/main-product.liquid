@@ -646,12 +646,6 @@
                   disabled
                 >
                 <div class="product-form__buttons">
-                <script>
-                console.log({{ product | json }});
-                    // document.getElementById(btnId).addEventListener("click", async function(event) {
-                        
-                    // })
-                </script>
                   <button
                     type="submit"
                     name="add"
@@ -681,6 +675,17 @@
                       </svg>
                     </div>
                   </button>
+                  <script>
+                    console.log({{ product | json }});
+                    let prod = {{product | json}};
+                    let btnId = prod.id;
+                    if(prod.handle === 'black-leather-bag'){
+                        document.getElementById(btnId).addEventListener("click", async function(event) {
+                            console.log(event);
+                            console.log({{ product | json }});
+                        })
+                    }
+                  </script>
                   {%- if block.settings.show_dynamic_checkout -%}
                     {{ form | payment_button }}
                   {%- endif -%}
