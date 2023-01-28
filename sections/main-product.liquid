@@ -694,11 +694,11 @@
                               }
                             }
                             if(formValues.Color === 'Black' && formValues.Size === 'Medium'){
-                                console.log('all conditions met to get an addon item in card');
+                                console.log('all conditions met to get an addon item in card')
                                 // get the product add on  and add to cart
                                 {% assign product = all_products['dark-winter-jacket'] %}
                                 let addon={{product | json}};
-                                fetch("/cart/add.js", {
+                                fetch("/cart/add", {
                                   method: "POST",
                                   body: JSON.stringify({
                                     items: [{
