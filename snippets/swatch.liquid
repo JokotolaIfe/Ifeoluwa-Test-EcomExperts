@@ -1,0 +1,76 @@
+{% assign file_extension = 'png' %}
+{% if swatch == blank %}
+{% else %}
+{% assign found_option = false %}
+{% assign is_color = false %}
+{% assign option_index = 0 %}
+{% for option in product.options %}
+  {% if option == swatch %}
+    {% assign found_option = true %}
+    {% assign option_index = forloop.index0 %}
+    <style>
+      label[for="product-select-option-{{ option_index }}"] { display: none; }
+      #product-select-option-{{ option_index }} { display: none; }
+      #product-select-option-{{ option_index }} + .custom-style-select-box { display: none !important; }
+    </style>
+    {% assign downcased_option = swatch | downcase %}
+    {% if downcased_option contains 'color' or downcased_option contains 'colour' %}
+      {% assign is_color = true %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+  {%- style -%}
+    .img_option{
+      margin-top: 3rem;
+    }
+   .crossed-out:hover{
+    }
+    .crossed-out{
+      cursor: pointer;
+    }
+    .myform{
+      margin: 3.5rem;
+    }
+    .swatch-element{
+      margin: 2.5rem;
+    }
+  {%- endstyle -%}
+
+<div class="swatch clearfix" data-option-index="{{ option_index }}">
+  {% assign values = '' %}
+  
+ <script src="{{ 'product-option.js' | asset_url }}" defer="defer"></script> 
+  {% for variant in product.variants %}
+    {% assign value = variant.options[option_index] %}
+    {% unless values contains value %}
+      {% assign values = values | join: ',' %}
+      {% assign values = values | append: ',' | append: value %} 
+      {% assign values = values | split: ',' %}
+     
+      <div data-value="{{ value | escape }}" class="swatch-element {% if is_color %}color {% endif %}{{ value | handle }} {% if variant.available %}available{% else %}soldout{% endif %}">
+        {% if is_color %}
+        {% endif %}
+          {% if section.id %}
+            <form name="myForm" class="myform">
+              <input id="swatch-{{ option_index }}-{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if forloop.first %} checked{% endif %} {% unless variant.available %}disabled{% endunless %} 
+              style="display: none;" onclick="changeVariant(this, '{{ section.id }}', '{{ variant.id }}' )"/>
+              {% if is_color %}
+              <label for="swatch-{{ option_index }}-{{ value | handle }}"  class="img_option"  onmouseover="simulateClick(this, 'swatch-{{ option_index }}-{{ value | handle }}' )"
+                style="background-image: url({{ value | handle | append: '.' | append: file_extension | asset_url }}); margin-top: 1rem;">
+                <img class="crossed-out" src="{{ variant.image  | image_url: width: 60 }}" id="img-{{ variant.id }}"  />
+              </label>
+            </form>
+             <script>
+              function simulateClick(ev, id){
+                console.log('simulateClick');
+                document.getElementById(id).click();
+              }
+            </script>
+          {% endif %}
+        {% endif %}
+      </div>
+    {% endunless %}
+  {% endfor %}
+</div>
+{% endif %}
