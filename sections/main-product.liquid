@@ -698,10 +698,11 @@
                                 // get the product add on  and add to cart
                                 {% assign product = all_products['dark-winter-jacket'] %}
                                 let addon={{product | json}};
+                                console.log(addon);
                                 var data_ = new FormData();
                                 data_.append('quantity', '1');
                                 data_.append('form_type', 'product');
-                                data_.append('id', addon.id);
+                                data_.append('id', ''+addon.id);
                                 data_.append('sections_url', '')
                                 data_.append('section', JSON.stringify(['cart-notification-product','cart-notification-button','cart-icon-bubble']))
                                 console.log(data_);
