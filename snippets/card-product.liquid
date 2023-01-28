@@ -273,6 +273,12 @@
                     </svg>
                   </div>
                 </button>
+                <script>
+                  let btnId = '{{ product_form_id }}-submit';
+                  document.getElementById(btnId).addEventListener("click", async function(event) {
+                    console.log('{{ card_product }}');
+                  })
+                </script>
               </modal-opener>
               <quick-add-modal id="QuickAdd-{{ card_product.id }}" class="quick-add-modal">
                 <div
