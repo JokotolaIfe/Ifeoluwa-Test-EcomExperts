@@ -36,8 +36,8 @@
   -%}
   <div class="card-wrapper product-card-wrapper underline-links-hover">
   <script>
+  console.log('{{ card_product | json }}');
   setTimeout(()=>{
-  console.log({{ card_product }});
     // let btnId = '{{ product_form_id }}-submit';
     //               document.getElementById(btnId).addEventListener("click", async function(event) {
     //                 console.log('{{ card_product }}');
