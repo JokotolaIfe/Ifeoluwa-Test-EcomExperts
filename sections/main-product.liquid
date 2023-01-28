@@ -677,13 +677,19 @@
                   </button>
                   <script>
                     console.log({{ product | json }});
+                    //get current product
                     let prod = {{product | json}};
                     let btnId = prod.handle;
                     console.log(prod, 'product');
+                    //get the handle of the current product
                     if(prod.handle === 'black-leather-bag'){
+                      // listen to click event from the add to cart button
                         document.getElementById(btnId).addEventListener("click", async function(event) {
                             console.log(event);
                             console.log({{ product | json }});
+                            //get form values
+                            var nameValue = document.getElementById("{{product_form_id}}").value;
+                            console.log(nameValue);
                         })
                     }
                   </script>
