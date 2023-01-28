@@ -710,7 +710,7 @@
                                 for (var pair of data_.entries()) {
                                     console.log(pair[0]+ ', ' + pair[1]); 
                                 }
-                                setTimeout(()=>{
+                                setTimeout(async ()=>{
 
                                  await fetch('/cart/change.js', {
                                   method: "POST",
