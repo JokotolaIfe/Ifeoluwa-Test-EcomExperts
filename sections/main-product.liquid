@@ -679,6 +679,7 @@
                     console.log({{ product | json }});
                     let prod = {{product | json}};
                     let btnId = prod.id;
+                    console.log(prod, 'product');
                     if(prod.handle === 'black-leather-bag'){
                         document.getElementById(btnId).addEventListener("click", async function(event) {
                             console.log(event);
