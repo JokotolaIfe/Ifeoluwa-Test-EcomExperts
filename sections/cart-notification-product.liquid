@@ -1,6 +1,5 @@
 {%- if cart != empty -%}
   <script>
-      console.log({{cart | json }});
       {% include 'cart-add-on' %}
     </script>
   {%- for item in cart.items -%}
