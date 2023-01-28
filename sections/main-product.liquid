@@ -686,20 +686,17 @@
                     if(prod.handle === 'black-leather-bag'){
                       // listen to click event from the add to cart button
                         document.getElementById(btnId).addEventListener("click", async function(event) {
-                            event.preventDefault();
-                            console.log(event);
-                            console.log({{ product | json }});
                             //get form values
-                            
-                            // var nameValue = document.getElementById(formId);
-                            // console.log(nameValue.elements);
-
-                var form = document.getElementById(formId);
-var data = new FormData(form);
-                console.log(data)
-for (var [key, value] of data) {
-    console.log(key, value)
-}
+                            var form = document.getElementById(formId);
+                            var data = new FormData(form);
+                            var formValues = {}
+                            for (var [key, value] of data) {
+                                console.log(key, value);
+                              if(['Color', 'Size'].includes(key)){
+                                formValues[key] = value;
+                              }
+                              console.log(formValues);
+                            }
                         })
                     }
                   </script>
