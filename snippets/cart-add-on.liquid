@@ -1,94 +1,43 @@
-                let cartItems = {{cart.items | json}};
-                
-                  if(cart && cartItems.length > 0){
-                    let conditionExist = cartItems.filter(el =>{
-                      return el.product_title === 'Handbag'
-                      && el.variant_options.includes('Black') 
-                      && el.variant_options.includes('Medium')
-                    });
-                    let addOnExist = cartItems.filter(el =>{
-                      return el.handle === 'dark-winter-jacket';
-                    });
-                    if(conditionExist.length > 0 && addOnExist.length === 0){
-                        {% assign product = all_products['dark-winter-jacket'] %}
-  
-                      {% unless cart.item_count == 0 or product.empty? or product.variants.first.available == false %}
-                        
-                        {% assign variant_id = product.variants.first.id %}
-  
-                        qtyInTheCart = 0;
-                        cartUpdates = {};
-                        for (var i=0; i<cartItems.length; i++) {
-                          if ( cartItems[i].id === {{ variant_id }} ) {
-                            qtyInTheCart = cartItems[i].quantity;
-                            break;
-                          }
-                        }
-                    
-                        if (cartItems.length === 1 && qtyInTheCart > 0) {
-                          cartUpdates = { {{ variant_id }}: 0 }
-                        }else if ( ( conditionExist.length > 0 ) && ( qtyInTheCart !== 1 ) && (addOnExist.length === 0) ) {
-                          cartUpdates = { {{ variant_id }}: 1 }
-                        }else {}
-
-                        fetch("/cart.js", {
-                          method: "POST",
-                          body: JSON.stringify({
-                            updates: cartUpdates
-                          }),
-                          headers: {
-                            "Content-type": "application/json; charset=UTF-8"
-                        }});
-
-                       setTimeout(async()=>{
-                          let url = '/cart.js';
-                          try {
-                              let res = await fetch(url);
-                              let cartData = await res.json();
-                              let cartItems_ = await cartData.items;
-                              if(cartItems_.length > cartItems.length){
-                                await document.dispatchEvent(new CustomEvent('cart:build' , {bubbles: true})); 
-                                await document.dispatchEvent(new CustomEvent('cart:refresh', {
-                                  bubbles: true,
-                                  detail: cartData
-                                })); 
-                                location = self['location'].href;
-                              }else{
-                              }
-                          } catch (error) {
-                              console.log(error);
-                          }
-                        },500);   
-                      }
-
-                      setTimeout(()=>{
-                        let index = cartItems.findIndex(el =>{
-                          return el.product_title === 'Handbag'
-                          && el.variant_options.includes('Black') 
-                          && el.variant_options.includes('Medium')
-                        });
-                        let btnId= "Remove-"+(index+1);
-                        console.log(document.getElementById(btnId));
-                        if(document.getElementById(btnId)){
-                          document.getElementById(btnId).addEventListener("click", async function(event) {
-                              setTimeout(async ()=>{
-                               await fetch('/cart/change.js', {
-                                method: "POST",
-                                body: JSON.stringify({
-                                  id: addOnExist[0].key,
-                                  quantity: 0
-                                }),
-                                headers: {
-                                  "Content-type": "application/json; charset=UTF-8"
-                                }
-                              });
-                              setTimeout(()=>{
-                                location.reload();
-                              },500)
-                            }, 2000)
-                        });
-                      };
-                    }, 3000);
-                          
-                  }  
-    {% endunless %}
+setTimeout(async ()=>{
+<!--  fetch cart items -->
+         let url = '/cart.js';
+        let res = await fetch(url);
+        let cartData = await res.json();
+        let cartItems = await cartData.items;
+<!--   check if addon item has already been added to cart -->
+         let addOnExist = cartItems.filter(el =>{
+          return el.handle === 'dark-winter-jacket';
+        });
+<!-- check if handbag, black and medium also exist in cart -->
+        let index = cartItems.findIndex(el =>{
+          return el.product_title === 'Handbag'
+          && el.variant_options.includes('Black') 
+          && el.variant_options.includes('Medium')
+        });
+<!--  get the index / position of the delete button tied to the handbag-->
+        let btnId= "Remove-"+(index+1);
+        console.log(document.getElementById(btnId));
+        if(document.getElementById(btnId)){
+<!--  listen to click event from the delete button -->
+          document.getElementById(btnId).addEventListener("click", async function(event) {
+            setTimeout(async ()=>{
+<!--  if handbag is deleted  -->
+              if(addOnExist.length > 0){
+                 await fetch('/cart/change.js', {
+                  method: "POST",
+                  body: JSON.stringify({
+                    id: addOnExist[0].key,
+                    quantity: 0
+                  }),
+                  headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                  }
+                });
+                setTimeout(()=>{
+                  location.reload();
+                },500);
+              }
+            }, 1000);
+        });
+      };
+    }, 3000);
