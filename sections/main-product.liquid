@@ -687,7 +687,8 @@
                               let url = '/cart.js';
                               let res = await fetch(url);
                               let cartData = await res.json();
-                              let cartItems_ = await cartData.items;
+                              let cartItems = await cartData.items;
+                
                               let addOnExist = cartItems.filter(el =>{
                                 return el.handle === 'dark-winter-jacket';
                               });
