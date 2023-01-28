@@ -698,15 +698,10 @@
                                 // get the product add on  and add to cart
                                 {% assign product = all_products['dark-winter-jacket'] %}
                                 let addon={{product | json}};
-                                fetch("/cart/add.js", {
-                                  method: "POST",
-                                  body: JSON.stringify({
-                                      quantity: 1,
-                                      id: addon.id
-                                  }),
-                                  headers: {
-                                    "Content-type": "application/json; charset=UTF-8"
-                                }});
+                                var data_ = new FormData();
+                                data_.append('quantity', 1);
+                                data_.append('id', addon.id);
+                                fetch("/cart/add", data_);
                             }
                         })
                     }
