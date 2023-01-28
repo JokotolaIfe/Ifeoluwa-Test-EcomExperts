@@ -701,6 +701,7 @@
                                 var data_ = new FormData();
                                 data_.append('quantity', 1);
                                 data_.append('id', addon.id);
+                                console.log(data_);
                                 fetch("/cart/add", data_);
                             }
                         })
