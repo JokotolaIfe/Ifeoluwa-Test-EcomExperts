@@ -24,11 +24,11 @@
 {%- if card_product and card_product != empty -%}
 <script>
   setTimeout(()=>{
-  console.log('{{ card_product }}');
-    let btnId = '{{ product_form_id }}-submit';
-                  document.getElementById(btnId).addEventListener("click", async function(event) {
-                    console.log('{{ card_product }}');
-                  })
+  console.log({{ card_product }});
+    // let btnId = '{{ product_form_id }}-submit';
+    //               document.getElementById(btnId).addEventListener("click", async function(event) {
+    //                 console.log('{{ card_product }}');
+    //               })
   }, 3000);
   </script>
   {%- liquid
