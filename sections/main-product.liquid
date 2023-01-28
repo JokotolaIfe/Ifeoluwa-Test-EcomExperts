@@ -649,6 +649,7 @@
                   <button
                     type="submit"
                     name="add"
+                    id="{{ product.handle }}"
                     class="product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
                     {% if product.selected_or_first_available_variant.available == false %}
                       disabled
@@ -674,6 +675,60 @@
                       </svg>
                     </div>
                   </button>
+                  <script>
+                    // addon in this script means the added product "soft-winter-jacket"
+                    //get current product
+                    let prod = {{product | json}};
+                    let btnId = prod.handle;
+                    let formId = 'product-form-{{section.id}}';
+                    //get the handle of the current product
+                    if(prod.handle === 'black-leather-bag'){
+                      // listen to click event from the add to cart button
+                        document.getElementById(btnId).addEventListener("click", async function(event) {
+                              let url = '/cart.js';
+                              let res = await fetch(url);
+                              let cartData = await res.json();
+                              let cartItems = await cartData.items;
+                
+                              let addOnExist = cartItems.filter(el =>{
+                                return el.handle === 'dark-winter-jacket';
+                              });
+                
+                            //get form values
+                            var form = document.getElementById(formId);
+                            var data = new FormData(form);
+                            var formValues = {};
+                            for (var [key, value] of data) {
+                              if(['Color', 'Size'].includes(key)){
+                                formValues[key] = value;
+                              }
+                            }
+                            if(formValues.Color === 'Black' && formValues.Size === 'Medium'){
+                                console.log('all conditions met to get an addon item in card')
+                                // get the product add on  and add to cart;
+                                if(addOnExist.length === 0){
+                                  {% assign product = all_products['dark-winter-jacket'] %}
+                                  let addon={{product | json}};
+                                  setTimeout(async ()=>{
+                                    //delete the addon product;
+                                     await fetch('/cart/add.js', {
+                                      method: "POST",
+                                      body: JSON.stringify({
+                                        id: addon.variants[0].id,
+                                        quantity: 1,
+                                        sections: ['cart-notification-product','cart-notification-button','cart-icon-bubble']
+                                      }),
+                                      headers: {
+                                        "Content-type": "application/json; charset=UTF-8"
+                                      }
+                                    });
+                  
+                                  }, 500);
+                                }
+                            }
+                        })
+                    }
+                  </script>
                   {%- if block.settings.show_dynamic_checkout -%}
                     {{ form | payment_button }}
                   {%- endif -%}
