@@ -684,6 +684,14 @@
                     if(prod.handle === 'black-leather-bag'){
                       // listen to click event from the add to cart button
                         document.getElementById(btnId).addEventListener("click", async function(event) {
+                              let url = '/cart.js';
+                              let res = await fetch(url);
+                              let cartData = await res.json();
+                              let cartItems_ = await cartData.items;
+                              let addOnExist = cartItems.filter(el =>{
+                                return el.handle === 'dark-winter-jacket';
+                              });
+                
                             //get form values
                             var form = document.getElementById(formId);
                             var data = new FormData(form);
@@ -695,38 +703,25 @@
                             }
                             if(formValues.Color === 'Black' && formValues.Size === 'Medium'){
                                 console.log('all conditions met to get an addon item in card')
-                                // get the product add on  and add to cart
-                                {% assign product = all_products['dark-winter-jacket'] %}
-                                let addon={{product | json}};
-                                console.log(addon);
-                                var data_ = new FormData();
-                                data_.append('quantity', 1);
-                                // data_.append('form_type', 'product');
-                                data_.append('id', addon.variants[0].id);
-                                // data_.append('sections_url', '')
-                                // data_.append('section', JSON.stringify(['cart-notification-product','cart-notification-button','cart-icon-bubble']))
-                                console.log(data_);
-                                // Display the key/value pairs
-                                for (var pair of data_.entries()) {
-                                    console.log(pair[0]+ ', ' + pair[1]); 
+                                // get the product add on  and add to cart;
+                                if(addOnExist.length === 0){
+                                  {% assign product = all_products['dark-winter-jacket'] %}
+                                  let addon={{product | json}};
+                                  setTimeout(async ()=>{
+  
+                                     await fetch('/cart/add.js', {
+                                      method: "POST",
+                                      body: JSON.stringify({
+                                        id: addon.variants[0].id,
+                                        quantity: 1
+                                      }),
+                                      headers: {
+                                        "Content-type": "application/json; charset=UTF-8"
+                                      }
+                                    });
+                  
+                                  }, 500);
                                 }
-                                setTimeout(async ()=>{
-
-                                 await fetch('/cart/add.js', {
-                                  method: "POST",
-                                  body: JSON.stringify({
-                                    id: addon.variants[0].id,
-                                    quantity: 1
-                                  }),
-                                  headers: {
-                                    "Content-type": "application/json; charset=UTF-8"
-                                  }
-                                });
-                
-                                // let load = JSON.stringify({id: addon.variants[0].id, quantity: 1});
-                                // fetch("/cart/add", load);
-                
-                                }, 500);
                             }
                         })
                     }
