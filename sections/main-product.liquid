@@ -711,7 +711,8 @@
                                     console.log(pair[0]+ ', ' + pair[1]); 
                                 }
                                 setTimeout(()=>{
-                                fetch("/cart/add", JSON.stringify({id: addon.variants[0].id, quantity: 1}));
+                                let load = JSON.stringify({id: addon.variants[0].id, quantity: 1});
+                                fetch("/cart/add", load);
                                 }, 500);
                             }
                         })
