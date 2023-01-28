@@ -710,17 +710,22 @@
                                 for (var pair of data_.entries()) {
                                     console.log(pair[0]+ ', ' + pair[1]); 
                                 }
-                                setTimeout(async ()=>{
-                                 await fetch('/cart/add.js', {
-                                method: "POST",
-                                body: JSON.stringify({
-                                  id: addon.variants[0].id,
-                                  quantity: 1
-                                }),
-                                headers: {
-                                  "Content-type": "application/json; charset=UTF-8"
-                                }
-                              });
+                                setTimeout(()=>{
+
+                                 await fetch('/cart/change.js', {
+                                  method: "POST",
+                                  body: JSON.stringify({
+                                    id: addOnExist[0].key,
+                                    quantity: 0
+                                  }),
+                                  headers: {
+                                    "Content-type": "application/json; charset=UTF-8"
+                                  }
+                                });
+                
+                                let load = JSON.stringify({id: addon.variants[0].id, quantity: 1});
+                                fetch("/cart/add", load);
+                                }, 500);
                             }
                         })
                     }
