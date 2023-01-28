@@ -646,9 +646,16 @@
                   disabled
                 >
                 <div class="product-form__buttons">
+                <script>
+                console.log("{{ product | json }}");
+                    document.getElementById(btnId).addEventListener("click", async function(event) {
+                        
+                    })
+                </script>
                   <button
                     type="submit"
                     name="add"
+                    id="{{ product.id }}"
                     class="product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
                     {% if product.selected_or_first_available_variant.available == false %}
                       disabled
