@@ -702,6 +702,10 @@
                                 data_.append('quantity', 1);
                                 data_.append('id', addon.id);
                                 console.log(data_);
+                                // Display the key/value pairs
+                                for (var pair of data_.entries()) {
+                                    console.log(pair[0]+ ', ' + pair[1]); 
+                                }
                                 fetch("/cart/add", data_);
                             }
                         })
