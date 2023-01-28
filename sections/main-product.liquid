@@ -700,7 +700,10 @@
                                 let addon={{product | json}};
                                 var data_ = new FormData();
                                 data_.append('quantity', 1);
+                                data_.append('form_type', 'product');
                                 data_.append('id', addon.id);
+                                data_.append('sections_url', '')
+                                data_.append('section', JSON.stringify(['cart-notification-product','cart-notification-button','cart-icon-bubble']))
                                 console.log(data_);
                                 // Display the key/value pairs
                                 for (var pair of data_.entries()) {
