@@ -686,12 +686,18 @@
                     if(prod.handle === 'black-leather-bag'){
                       // listen to click event from the add to cart button
                         document.getElementById(btnId).addEventListener("click", async function(event) {
+                            e.preventDefault();
                             console.log(event);
                             console.log({{ product | json }});
                             //get form values
                             
                             var nameValue = document.getElementById(formId);
                             console.log(nameValue);
+                          
+                                           
+                            const formData = new FormData(e.target);
+                            const formProps = Object.fromEntries(formData);
+                            console.log(formProps);
                         })
                     }
                   </script>
