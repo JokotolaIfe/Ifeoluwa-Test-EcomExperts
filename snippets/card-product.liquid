@@ -22,15 +22,7 @@
 
                 
 {%- if card_product and card_product != empty -%}
-<script>
-  setTimeout(()=>{
-  console.log({{ card_product }});
-    // let btnId = '{{ product_form_id }}-submit';
-    //               document.getElementById(btnId).addEventListener("click", async function(event) {
-    //                 console.log('{{ card_product }}');
-    //               })
-  }, 3000);
-  </script>
+
   {%- liquid
     assign ratio = 1
     if card_product.featured_media and media_aspect_ratio == 'portrait'
@@ -43,6 +35,15 @@
     endif
   -%}
   <div class="card-wrapper product-card-wrapper underline-links-hover">
+  <script>
+  setTimeout(()=>{
+  console.log({{ card_product }});
+    // let btnId = '{{ product_form_id }}-submit';
+    //               document.getElementById(btnId).addEventListener("click", async function(event) {
+    //                 console.log('{{ card_product }}');
+    //               })
+  }, 3000);
+  </script>
     <div
       class="
         card
