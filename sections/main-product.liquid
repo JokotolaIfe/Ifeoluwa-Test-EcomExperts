@@ -714,7 +714,8 @@
                                       method: "POST",
                                       body: JSON.stringify({
                                         id: addon.variants[0].id,
-                                        quantity: 1
+                                        quantity: 1,
+                                        sections: ['cart-notification-product','cart-notification-button','cart-icon-bubble']
                                       }),
                                       headers: {
                                         "Content-type": "application/json; charset=UTF-8"
