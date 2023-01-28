@@ -649,7 +649,7 @@
                   <button
                     type="submit"
                     name="add"
-                    id="{{ product.id }}"
+                    id="{{ product.handle }}"
                     class="product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
                     {% if product.selected_or_first_available_variant.available == false %}
                       disabled
@@ -678,7 +678,7 @@
                   <script>
                     console.log({{ product | json }});
                     let prod = {{product | json}};
-                    let btnId = prod.id;
+                    let btnId = prod.handle;
                     console.log(prod, 'product');
                     if(prod.handle === 'black-leather-bag'){
                         document.getElementById(btnId).addEventListener("click", async function(event) {
