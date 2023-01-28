@@ -693,7 +693,12 @@
                             
                             var nameValue = document.getElementById(formId);
                             console.log(nameValue.elements);
-                          
+
+                var form = document.getElementById(formId);
+var data = new FormData(form);
+for (var [key, value] of data) {
+    console.log(key, value)
+}
                         })
                     }
                   </script>
