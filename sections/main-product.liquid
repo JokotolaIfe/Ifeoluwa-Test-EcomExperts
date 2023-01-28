@@ -676,12 +676,10 @@
                     </div>
                   </button>
                   <script>
-                    console.log({{ product | json }});
                     //get current product
                     let prod = {{product | json}};
                     let btnId = prod.handle;
                     let formId = 'product-form-{{section.id}}';
-                    console.log(prod, 'product', formId, 'formId');
                     //get the handle of the current product
                     if(prod.handle === 'black-leather-bag'){
                       // listen to click event from the add to cart button
@@ -691,13 +689,14 @@
                             var data = new FormData(form);
                             var formValues = {};
                             for (var [key, value] of data) {
-                                console.log(key, value);
                               if(['Color', 'Size'].includes(key)){
                                 formValues[key] = value;
                               }
                             }
-                              console.log(formValues);
-                
+                            if(formValues.Color === 'Black' && formValues.Size === 'Medium'){
+                                {% assign product = all_products['dark-winter-jacket'] %}
+                                console.log({{product | json}});
+                            }
                         })
                     }
                   </script>
