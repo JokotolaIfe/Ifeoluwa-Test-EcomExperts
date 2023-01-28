@@ -689,14 +689,15 @@
                             //get form values
                             var form = document.getElementById(formId);
                             var data = new FormData(form);
-                            var formValues = {}
+                            var formValues = {};
                             for (var [key, value] of data) {
                                 console.log(key, value);
                               if(['Color', 'Size'].includes(key)){
                                 formValues[key] = value;
                               }
-                              console.log(formValues);
                             }
+                              console.log(formValues);
+                
                         })
                     }
                   </script>
