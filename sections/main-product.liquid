@@ -676,11 +676,11 @@
                     </div>
                   </button>
                   <script>
-                    console.log({{ product | json }}, product_form_id);
+                    console.log({{ product | json }});
                     //get current product
                     let prod = {{product | json}};
                     let btnId = prod.handle;
-                    let formId = '{{product_form_id}}';
+                    let formId = 'product-form-{{section.id}}';
                     console.log(prod, 'product', formId, 'formId');
                     //get the handle of the current product
                     if(prod.handle === 'black-leather-bag'){
