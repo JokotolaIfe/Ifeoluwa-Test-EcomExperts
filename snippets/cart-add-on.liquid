@@ -32,6 +32,7 @@ setTimeout(async ()=>{
             });
               <!--  if handbag is deleted  -->
               if(await addOnExist_.length > 0){
+                console.log('add on exist');
                 console.log('execue delete');
                  await fetch('/cart/change.js', {
                   method: "POST",
