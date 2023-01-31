@@ -23,13 +23,14 @@ setTimeout(async ()=>{
           document.getElementById(btnId).addEventListener("click", async function(event) {
             setTimeout(async ()=>{
             <!-- refetch cart items -->
-            let res_ = await fetch(url);
+<!--             let res_ = await fetch(url);
             let cartData_ = await res_.json();
-            let cartItems_ = await cartData_.items;
+            let cartItems_ = await cartData_.items; -->
             <!--   check if addon item has already been added to cart -->
-             let addOnExist_ = await cartItems_.filter(el =>{
+             let addOnExist_ = await cartItems.filter(el =>{
               return el.handle === 'dark-winter-jacket';
             });
+            console.log(addOnExist);
               <!--  if handbag is deleted  -->
               if(await addOnExist_.length > 0){
                 console.log('add on exist');
