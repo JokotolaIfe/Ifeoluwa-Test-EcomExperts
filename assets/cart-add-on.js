@@ -1,5 +1,3 @@
-<script>
-
   setTimeout(async ()=>{
     // addon in this script means the added product "soft-winter-jacket" -->
          let url = '/cart.js';
@@ -49,6 +47,3 @@
         });
       };
     }, 1200);
-
-
-</script>
