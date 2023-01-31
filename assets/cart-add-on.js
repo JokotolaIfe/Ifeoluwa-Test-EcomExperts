@@ -9,19 +9,9 @@
          let addOnExist = await cartItems.filter(el =>{
           return el.handle === 'dark-winter-jacket';
         });
-  // check if handbag, black and medium also exist in cart
-        let index = await cartItems.findIndex(el =>{
-          return el.product_title === 'Handbag'
-          && el.variant_options.includes('Black') 
-          && el.variant_options.includes('Medium')
-        });
-      // get the index / position of the delete button tied to the handbag-->
-        let btnId= "Btn-Remove-"+(await index+1);
-        console.log(await document.getElementById(btnId));
-
-          console.log(await document.getElementById(btnId));
-    var element = document.querySelector('[aria-label="Remove Handbag - Black / Medium"]');
-    console.log(element.id);
+        var element = document.querySelector('[aria-label="Remove Handbag - Black / Medium"]');
+        console.log(element.id);
+        let btnId = element.id;
         if(await document.getElementById(btnId)){
       // listen to click event from the delete button -->
           await document.getElementById(await btnId).addEventListener("click", async function(event) {
