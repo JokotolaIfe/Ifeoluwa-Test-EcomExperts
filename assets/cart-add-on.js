@@ -20,8 +20,8 @@
         console.log(await document.getElementById(btnId));
 
           console.log(await document.getElementById(btnId));
-    var element = document.querySelector('[aria-label="Remove Handbag - Black / Medium"]');
-    console.log(element.id);
+          var element = document.querySelector('[aria-label="Remove Handbag - Black / Medium"]');
+          let btnId = element.id;
         if(await document.getElementById(btnId)){
       // listen to click event from the delete button -->
           await document.getElementById(await btnId).addEventListener("click", async function(event) {
