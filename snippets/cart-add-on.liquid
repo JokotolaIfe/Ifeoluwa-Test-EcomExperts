@@ -43,9 +43,7 @@ setTimeout(async ()=>{
                     "Content-type": "application/json; charset=UTF-8"
                   }
                 });
-                setTimeout(()=>{
-                  location.reload();
-                },500);
+                await location.reload();
               }
             }, 500);
         });
