@@ -40,9 +40,10 @@
                   headers: {
                     "Content-type": "application/json; charset=UTF-8"
                   }
-                });
+                }); 
                 await location.reload();
               }
+              return;
             }, 500);
         }, false);
       };
