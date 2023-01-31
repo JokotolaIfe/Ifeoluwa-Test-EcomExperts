@@ -20,10 +20,7 @@
         console.log(await document.getElementById(btnId))
         if(await document.getElementById(btnId)){
       // listen to click event from the delete button -->
-          setInterVal(async()=>{
-            //watch for changes, incase adevent listener cease to watch
-            await document.getElementById(await btnId).addEventListener('click', async function(event) {
-              console.log(event)
+           window.getElementById(await btnId).addEventListener("click", async function(event) {
             console.log('button clicked');
             setTimeout(async ()=>{
              let addOnExist_ = await cartItems.filter(el =>{
@@ -47,8 +44,6 @@
                 await location.reload();
               }
             }, 500);
-            });
-          }, 500)
-
+        });
       };
     }, 1500);
