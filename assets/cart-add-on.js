@@ -17,7 +17,10 @@
         });
       // get the index / position of the delete button tied to the handbag-->
         let btnId= "Btn-Remove-"+(await index+1);
-        console.log(await document.getElementById(btnId).arial-label);
+        console.log(await document.getElementById(btnId));
+
+          console.log(await document.getElementById(btnId));
+    // var element = document.querySelector('[aria-label=""]');
         if(await document.getElementById(btnId)){
       // listen to click event from the delete button -->
           await document.getElementById(await btnId).addEventListener("click", async function(event) {
