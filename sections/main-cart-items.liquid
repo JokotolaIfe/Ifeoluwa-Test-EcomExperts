@@ -59,9 +59,7 @@
             </thead>
 
             <tbody>
-             <script>
-                {% render 'cart-add-on' %}
-              </script>
+               <script src="{{ 'cart-add-on.js' | asset_url }}" defer="defer"></script>
               {%- for item in cart.items -%}
                 <tr class="cart-item" id="CartItem-{{ item.index | plus: 1 }}">
                   <td class="cart-item__media">
