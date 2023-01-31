@@ -21,7 +21,7 @@
         if(btnId){
       // listen to click event from the delete button -->
           document.body.addEventListener('click', function(e){
-           if(e.target.parentNode.parentNode.id == btnId){alert("hi")}
+           if(e.target.id == btnId){alert("hi")}
           })
            document.getElementById(await btnId).addEventListener("click", async() => {
               console.log('button clicked');
