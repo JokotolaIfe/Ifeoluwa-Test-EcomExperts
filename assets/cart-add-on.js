@@ -21,12 +21,12 @@
         if(document.getElementById(await btnId)){
       // listen to click event from the delete button -->
            document.getElementById(await btnId).addEventListener("click", async function(event) {
-            console.log('button clicked');
-            setTimeout(async ()=>{
-             let addOnExist_ = await cartItems.filter(el =>{
-              return el.handle === 'dark-winter-jacket';
-            });
-            console.log(addOnExist);
+              console.log('button clicked', event);
+              setTimeout(async ()=>{
+               let addOnExist_ = await cartItems.filter(el =>{
+                return el.handle === 'dark-winter-jacket';
+              });
+              console.log(addOnExist);
               // if handbag is deleted  -->
               if(await addOnExist_.length > 0){
                 console.log('add on exist');
@@ -44,6 +44,6 @@
                 await location.reload();
               }
             }, 500);
-        });
+        }, false);
       };
     }, 1500);
