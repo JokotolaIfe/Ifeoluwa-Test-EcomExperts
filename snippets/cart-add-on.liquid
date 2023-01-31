@@ -31,12 +31,12 @@ setTimeout(async ()=>{
               return el.handle === 'dark-winter-jacket';
             });
               <!--  if handbag is deleted  -->
-              if(addOnExist_.length > 0){
+              if(await addOnExist_.length > 0){
                 console.log('execue delete');
                  await fetch('/cart/change.js', {
                   method: "POST",
                   body: JSON.stringify({
-                    id: addOnExist[0].key,
+                    id: await addOnExist[0].key,
                     quantity: 0
                   }),
                   headers: {
@@ -47,7 +47,7 @@ setTimeout(async ()=>{
                   location.reload();
                 },500);
               }
-            }, 2000);
+            }, 500);
         });
       };
     }, 3000);
