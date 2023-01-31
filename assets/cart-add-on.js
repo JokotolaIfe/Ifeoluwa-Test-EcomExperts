@@ -19,6 +19,7 @@
         if(btnId){
         // listen to click event from the delete button -->
           document.body.addEventListener('click', function(e){
+            // when the delete icon is clicked or the svg or the path
            if(e.target.id === btnId || e.target.parentNode.id === btnId || e.target.parentNode.parentNode.id === btnId){
               setTimeout(async ()=>{
                let addOnExist_ = await cartItems.filter(el =>{
