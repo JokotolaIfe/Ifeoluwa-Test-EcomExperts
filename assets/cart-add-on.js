@@ -4,12 +4,11 @@
         let res = await fetch(url);
         let cartData = await res.json();
         let cartItems = await cartData.items;
-        console.log(cartItems);
-    // check if addon item has already been added to cart
+      // check if addon item has already been added to cart
          let addOnExist = await cartItems.filter(el =>{
           return el.handle === 'dark-winter-jacket';
         });
-  // check if handbag, black and medium also exist in cart
+      // check if handbag, black and medium also exist in cart
         let index = await cartItems.findIndex(el =>{
           return el.product_title === 'Handbag'
           && el.variant_options.includes('Black') 
@@ -17,12 +16,10 @@
         });
       // get the index / position of the delete button tied to the handbag-->
         let btnId = await cartItems[index].key;
-        console.log(document.getElementById(await btnId))
         if(btnId){
         // listen to click event from the delete button -->
           document.body.addEventListener('click', function(e){
            if(e.target.id === btnId || e.target.parentNode.id === btnId || e.target.parentNode.parentNode.id === btnId){
-              console.log('button clicked');
               setTimeout(async ()=>{
                let addOnExist_ = await cartItems.filter(el =>{
                 return el.handle === 'dark-winter-jacket';
