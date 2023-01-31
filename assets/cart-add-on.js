@@ -20,8 +20,8 @@
         console.log(document.getElementById(await btnId))
         if(document.getElementById(await btnId)){
       // listen to click event from the delete button -->
-           document.getElementById(await btnId).addEventListener("click", (event) => {
-              console.log('button clicked', event);
+           document.getElementById(await btnId).addEventListener("click", () => {
+              console.log('button clicked');
               setTimeout(async ()=>{
                let addOnExist_ = await cartItems.filter(el =>{
                 return el.handle === 'dark-winter-jacket';
