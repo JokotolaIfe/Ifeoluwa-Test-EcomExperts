@@ -59,9 +59,6 @@
             </thead>
 
             <tbody>
-              <script>
-                {% include 'cart-add-on' %}
-              </script>
               {%- for item in cart.items -%}
                 <tr class="cart-item" id="CartItem-{{ item.index | plus: 1 }}">
                   <td class="cart-item__media">
@@ -289,6 +286,9 @@
                   </td>
                 </tr>
               {%- endfor -%}
+             <script>
+                {% include 'cart-add-on' %}
+              </script>
             </tbody>
           </table>
         {%- endif -%}
