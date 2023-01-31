@@ -3,8 +3,8 @@ setTimeout(async ()=>{
 <!--   // addon in this script means the added product "soft-winter-jacket" -->
          let url = '/cart.js';
         let res = await fetch(url);
-        let cartData = res.json();
-        let cartItems = cartData.items;
+        let cartData = await res.json();
+        let cartItems = await cartData.items;
         console.log(cartItems);
 <!--   check if addon item has already been added to cart -->
          let addOnExist = cartItems.filter(el =>{
