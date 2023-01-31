@@ -2,9 +2,9 @@ setTimeout(async ()=>{
 <!--  fetch cart items -->
 <!--   // addon in this script means the added product "soft-winter-jacket" -->
          let url = '/cart.js';
-        let res = await fetch(url);
-        let cartData = await res.json();
-        let cartItems = await cartData.items;
+        let res = fetch(url);
+        let cartData = res.json();
+        let cartItems = cartData.items;
 <!--   check if addon item has already been added to cart -->
          let addOnExist = cartItems.filter(el =>{
           return el.handle === 'dark-winter-jacket';
@@ -20,7 +20,7 @@ setTimeout(async ()=>{
         console.log(document.getElementById(btnId));
         if(document.getElementById(btnId)){
 <!--  listen to click event from the delete button -->
-          document.getElementById(btnId).addEventListener("click", async function(event) {
+          await document.getElementById(btnId).addEventListener("click", async function(event) {
             setTimeout(async ()=>{
             console.log('button clicked');
              let addOnExist_ = await cartItems.filter(el =>{
