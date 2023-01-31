@@ -22,6 +22,7 @@ setTimeout(async ()=>{
 <!--  listen to click event from the delete button -->
           document.getElementById(btnId).addEventListener("click", async function(event) {
             setTimeout(async ()=>{
+            console.log('button clicked');
              let addOnExist_ = await cartItems.filter(el =>{
               return el.handle === 'dark-winter-jacket';
             });
