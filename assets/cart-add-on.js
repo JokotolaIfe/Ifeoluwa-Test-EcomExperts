@@ -19,12 +19,9 @@
         let btnId = await cartItems[index].key;
         console.log(document.getElementById(await btnId))
         if(btnId){
-      // listen to click event from the delete button -->
+        // listen to click event from the delete button -->
           document.body.addEventListener('click', function(e){
-            console.log(e.target, e.target.parentNode)
-           if(e.target.id === btnId || e.target.parentNode.id){alert("hi")}
-          })
-           document.getElementById(await btnId).addEventListener("click", async() => {
+           if(e.target.id === btnId || e.target.parentNode.id === btnId){
               console.log('button clicked');
               setTimeout(async ()=>{
                let addOnExist_ = await cartItems.filter(el =>{
@@ -49,6 +46,7 @@
               }
               return;
             }, 500);
-        }, false);
+           }
+        });
       };
     }, 1500);
