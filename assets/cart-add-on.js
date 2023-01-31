@@ -17,8 +17,8 @@
         });
       // get the index / position of the delete button tied to the handbag-->
         let btnId = await cartItems[index].key;
-        console.log(await document.getElementById(btnId))
-        if(await document.getElementById(btnId)){
+        console.log(document.getElementById(await btnId))
+        if(document.getElementById(await btnId)){
       // listen to click event from the delete button -->
            document.getElementById(await btnId).addEventListener("click", async function(event) {
             console.log('button clicked');
